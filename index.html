@@ -1,26 +1,19 @@
 
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
     <title>طبيبي الذكي</title>
 </head>
-<body>
-    <h1>مرحباً بك في طبيبي الذكي</h1>
-    <p>يرجى كتابة أعراضك وسيتم الرد فوراً:</p>
-    <textarea id="input" rows="4" cols="50"></textarea>
-    <button onclick="getResponse()">إرسال</button>
-    <h3>الرد:</h3>
-    <div id="responseBox"></div>
+<body style="direction: rtl; font-family: Arial;">
+    <h2>مرحباً بك في طبيبي الذكي</h2>
+    <p>اكتب أعراضك وسيتم الرد عليك فوراً:</p>
+    <textarea id="userInput" rows="4" cols="50"></textarea>
+    <button onclick="sendQuery()">إرسال</button>
 
-    <script>
-        async function getResponse() {
-            const input = document.getElementById("input").value;
-            const responseBox = document.getElementById("responseBox");
-            responseBox.innerHTML = "جاري المعالجة...";
-            const reply = "هذه محاكاة للرد الذكي على الأعراض: " + input;
-            setTimeout(() => responseBox.innerHTML = reply, 1000);
-        }
-    </script>
+    <h3>الرد:</h3>
+    <div id="responseBox" style="border:1px solid #ccc; padding:10px;"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
