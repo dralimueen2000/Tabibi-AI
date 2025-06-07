@@ -1,18 +1,19 @@
+
 async function sendQuery() {
     const input = document.getElementById("userInput").value;
-    const responseText = document.getElementById("responseText");
-    responseText.innerText = "جارٍ المعالجة...";
+    const responseBox = document.getElementById("responseBox");
+    responseBox.textContent = "الرد: جارٍ المعالجة...";
 
     try {
-        const res = await fetch("https://tabibi-proxy.vercel.app/api/chat", {
+        const res = await fetch("https://tabibi-proxy.onrender.com/api/chat", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ message: input })
         });
 
         const data = await res.json();
-        responseText.innerText = data.reply || "لم يتم الحصول على رد.";
+        responseBox.textContent = "الرد: " + (data.reply || "لم يتمكن من توليد رد.");
     } catch (error) {
-        responseText.innerText = "حدث خطأ في الاتصال.";
+        responseBox.textContent = "الرد: حدث خطأ في الاتصال.";
     }
 }

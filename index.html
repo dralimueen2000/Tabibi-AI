@@ -1,22 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <title>طبيبي الذكي</title>
     <style>
-        body { direction: rtl; font-family: 'Arial', sans-serif; background-color: #f5f9ff; color: #000; padding: 20px; }
-        textarea { width: 100%; margin-bottom: 10px; }
-        button { padding: 8px 16px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
-        #responseBox { border: 1px solid #ccc; padding: 10px; background-color: #fff; margin-top: 20px; }
+        body {
+            font-family: 'Arial', sans-serif;
+            direction: rtl;
+            background-color: #f0f4fc;
+            padding: 20px;
+        }
+        textarea, button {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        #responseBox {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e7f0ff;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
-    <h2>مرحباً بك في طبيبي الذكي</h2>
+    <h1>مرحباً بك في طبيبي الذكي</h1>
     <p>اكتب الأعراض وسيتم الرد عليك فوراً:</p>
-    <textarea id="userInput" rows="4"></textarea><br>
+    <textarea id="userInput" rows="4" cols="50" placeholder="مثلاً: صداع، حرارة، آلام..."></textarea><br>
     <button onclick="sendQuery()">إرسال</button>
 
-    <div id="responseBox">الرد: <span id="responseText">جارٍ المعالجة...</span></div>
+    <div id="responseBox">الرد: جارٍ المعالجة...</div>
 
     <script src="script.js"></script>
 </body>
