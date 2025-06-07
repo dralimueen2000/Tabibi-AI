@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>طبيبي الذكي</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2fb;
+            text-align: center;
+            padding: 20px;
+        }
+        textarea {
+            width: 80%;
+            height: 60px;
+            margin-top: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .response-box {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #e8f0fe;
+            border: 1px solid #ccc;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>مرحباً بك في طبيبي الذكي</h2>
+    <p>اكتب الأعراض وسيتم الرد عليك فوراً:</p>
+    <textarea id="userInput" placeholder="مثال: صداع، ألم في المعدة..."></textarea><br>
+    <button onclick="sendToAPI()">إرسال</button>
+
+    <div class="response-box" id="responseBox">الرد: بانتظار الإدخال...</div>
+
+    <script>
+        const apiUrl = 'https://ali-app-alimueen75.replit.dev';
+
+        async function sendToAPI() {
+            const userInput = document.getElementById("userInput").value;
+            const responseBox = document.getElementById("responseBox");
+            responseBox.innerText = "جاري المعالجة...";
+
+            try {
+                const response = await fetch(apiUrl + "/ask", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ message: userInput })
+                });
+
+                if (!response.ok) throw new Error("فشل الاتصال بالخادم.");
+
+                const data = await response.json();
+                responseBox.innerText = "الرد: " + data.response;
+            } catch (error) {
+                responseBox.innerText = "الرد: حدث خطأ في الاتصال.";
+            }
+        }
+    </script>
+</body>
+</html>
