@@ -1,36 +1,38 @@
-
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <title>طبيبي الذكي</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            direction: rtl;
-            background-color: #f0f4fc;
-            padding: 20px;
-        }
-        textarea, button {
-            font-size: 1rem;
-            margin-top: 10px;
-        }
-        #responseBox {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #e7f0ff;
-            border: 1px solid #ccc;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>طبيبي الذكي</title>
 </head>
-<body>
-    <h1>مرحباً بك في طبيبي الذكي</h1>
-    <p>اكتب الأعراض وسيتم الرد عليك فوراً:</p>
-    <textarea id="userInput" rows="4" cols="50" placeholder="مثلاً: صداع، حرارة، آلام..."></textarea><br>
-    <button onclick="sendQuery()">إرسال</button>
+<body style="font-family: Arial, sans-serif; text-align: center; background-color: #eef1f7;">
+  <h2>مرحباً بك في طبيبي الذكي</h2>
+  <p>اكتب الأعراض وسيتم الرد عليك فوراً:</p>
+  <textarea id="userInput" rows="4" cols="50" placeholder="مثال: صداع، دوخة، سعال..."></textarea><br><br>
+  <button onclick="sendMessage()">إرسال</button>
+  <p><strong>الرد:</strong> <span id="response">جارٍ المعالجة...</span></p>
 
-    <div id="responseBox">الرد: جارٍ المعالجة...</div>
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById('userInput').value;
+      const responseBox = document.getElementById('response');
+      responseBox.innerText = "جارٍ المعالجة...";
 
-    <script src="script.js"></script>
+      try {
+        const res = await fetch('https://2a1e8b91-2aab-422c-b229-4d827993b226-00-3h0n5i70nh3qe.pike.replit.dev/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ message: input })
+        });
+
+        const data = await res.json();
+        responseBox.innerText = data.reply || "لم يتم استلام رد.";
+      } catch (error) {
+        responseBox.innerText = "حدث خطأ في الاتصال.";
+      }
+    }
+  </script>
 </body>
 </html>
